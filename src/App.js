@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
-import Title from './comps/Title';
-import UploadForm from './comps/UploadForm';
-import ImageGrid from './comps/ImageGrid';
-import Modal from './comps/Modal';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Home from "./Home";
+import Login from "./Login";
+import SignUp from "./SignUp.js";
+import { AuthProvider } from "./Auth";
+import Navbar from './Navbar'
+import PrivateRoute from "./PrivateRoute";
 
-function App() {
-  const [selectedImg, setSelectedImg] = useState(null);
+const App = () => {
   return (
-    <div >
-      <Title/>
-      <UploadForm />
-      <ImageGrid setSelectedImg={setSelectedImg} />
-      {selectedImg && <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg}/>}
-    </div>
+    <AuthProvider>
+      <Router>
+      <Navbar />
+        <div className="App">
+          <PrivateRoute exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+        </div>
+      </Router>
+    </AuthProvider>
   );
-}
+};
 
 export default App;
+
