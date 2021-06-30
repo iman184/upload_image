@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 import app from "./firebase/config";
-export const Home = () => {
-    return (
-        <div>
-         <nav className="navbar navbar-expand-lg navbar-light ">
+import Title from './comps/Title';
+import UploadForm from './comps/UploadForm';
+import ImageGrid from './comps/ImageGrid';
+import Modal from './comps/Modal';
+
+const Galerie = () => {
+   const [selectedImg, setSelectedImg] = useState(null);
+  return (
+    <>
+    <nav className="navbar navbar-expand-lg navbar-light ">
           <div className="container-fluid">
 
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,15 +28,20 @@ export const Home = () => {
                   <Link to='/contact' className="nav-link active" aria-current="page" href="#">Contact</Link>
                 </li>
                 <li className="nav-item">
-            <Link  to='login' onClick={() => app.auth().signOut()}>Sign out</Link>
+                <Link onClick={() => app.auth().signOut()}>Sign out</Link>
                 </li>
                
               </ul>
             </div>
           </div>
         </nav>
-            <h1>Home</h1>
-        </div>
-    )
-}
-export default Home;
+ <Title/>
+      <UploadForm />
+      <ImageGrid setSelectedImg={setSelectedImg} />
+      {selectedImg && <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg}/>}   
+ 
+    </>
+  );
+};
+
+export default Galerie;
