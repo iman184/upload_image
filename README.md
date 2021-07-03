@@ -1,3 +1,6 @@
+# First version 
+this is a project of upload image using firebase and react but without add design to it . in the futer i will add the design and make it responsive
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
